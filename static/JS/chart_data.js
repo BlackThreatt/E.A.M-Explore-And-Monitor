@@ -1,6 +1,6 @@
 var temperature = document.getElementById('temperature');
 var apikey = document.getElementById('apikey').value ;
-var devicename = "ARMS12012";
+var devicename = "Sensor_Pi";
 
 function getdevice(){
     var requests = $.get('/api/' + apikey + '/deviceinfo/' + devicename);

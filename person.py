@@ -1,26 +1,25 @@
 from database import db
+# from passlib.hash import sha512_crypt as sha
 import hashlib
-from passlib.hash import sha512_crypt as sha
 from datetime import datetime
 
 class user:
 
     def __init__(self, username, password):
-        self.db = db('aman', '127.0.0.1', 'hacker123', 'ARMS')
+        self.db = db('dbuser', '127.0.0.1', 'dbpass', 'ARMS')
         self.username = username 
-        self.secret = password
+        self.secret = hash = hashlib.sha512( password.encode("utf-8") ).hexdigest()
         self.authenticated = False
         self.auth()
         self.get_details()
         self.get_devices()
-
     def auth (self):
         #this is the place where user will get authenticated
         try:
             query = 'select password from users where username = "{0}"'.format(self.username)
             self.db.cursor.execute(query)
             output = self.db.cursor.fetchall()
-            if sha.verify(self.secret, output[0][0]):
+            if self.secret == output[0][0]:
                 self.authenticated = True
                 
                 query = 'update users set last_login = now() where username = "{0}";'.format(self.username)

@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 logged_in = {}
 api_loggers = {}
-mydb = database.db('aman', '127.0.0.1', 'hacker123', 'ARMS')
+mydb = database.db('dbuser', '127.0.0.1', 'dbpass', 'ARMS')
 
 #test api key aGFja2luZ2lzYWNyaW1lYXNmc2FmZnNhZnNhZmZzYQ==
 
@@ -38,7 +38,7 @@ def Dashoboard():
 
     devices = [
         {"Dashboard" : "device1",
-        "deviceID": "Device1"
+        "deviceID": "Sensor_Pi"
         }
     ]
     return render_template('device_dashboard.htm', title='Dashobard', user=user, devices=devices)
@@ -64,7 +64,7 @@ def overview(username, session):
 
         devices = [
             {"Dashboard" : "device1",
-            "deviceID": "Device1"
+            "deviceID": "Sensor_Pi"
             }
         ]
         return render_template('overview.htm', title='Overview', user=user, devices=devices)
@@ -88,7 +88,7 @@ def apisettings(username, session):
 
         devices = [
             {"Dashboard" : "device1",
-            "deviceID": "Device1"
+            "deviceID": "Sensor_Pi"
             }
         ]
         return render_template('api_settings.htm', title='API-Settings', user=user, devices=devices)
@@ -118,7 +118,7 @@ def profile(username, session):
 
         devices = [
             {"Dashboard" : "device1",
-            "deviceID": "ARMS12012"
+            "deviceID": "Sensor_Pi"
             }
         ]
         return render_template('profile.htm', title='API-Settings', user=user, devices=devices)
@@ -199,6 +199,7 @@ def device_info (apikey, deviceID):
         data = api_loggers[apikey]["object"].dev_info(deviceID)
 
         #this part is hard coded so remove after fixing the issue
+        print(data)
         data = list(data)
         data[2] = "Rosegarden"
         return jsonify (data)
@@ -277,7 +278,6 @@ def update_values(apikey, data):
         print (e)
         return jsonify({"data":"Oops Looks like api is not correct"})
 
-
 @app.route("/api/<string:apikey>/temperature", methods=["GET", "POST"])
 def get_temperature(apikey):
     
@@ -289,7 +289,6 @@ def get_temperature(apikey):
 
 @app.route("/api/<string:apikey>/moisture", methods=["GET", "POST"])
 def get_moisture(apikey):
-    
     randData = choice(randlist)
     time = datetime.now()
     time = time.strftime("%H:%M:%S")
@@ -298,7 +297,6 @@ def get_moisture(apikey):
 
 @app.route("/api/<string:apikey>/humidity", methods=["GET", "POST"])
 def get_humidity(apikey):
-    
     randData = choice(randlist)
     time = datetime.now()
     time = time.strftime("%H:%M:%S")
@@ -307,13 +305,11 @@ def get_humidity(apikey):
 
 @app.route("/api/<string:apikey>/light", methods=["GET", "POST"])
 def get_light(apikey):
-    
     randData = choice(randlist)
     time = datetime.now()
     time = time.strftime("%H:%M:%S")
     response = [time, randData]
     return jsonify(response)
-
 
 def encode(data):
     data = json.dumps(data)
@@ -330,4 +326,4 @@ def decode(base64_message):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port = "80", debug=True)
+    app.run(host="0.0.0.0", port = "8080", debug=True)

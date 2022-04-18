@@ -41,7 +41,7 @@ class db:
         except Exception as e:
             print( e)
     
-    def update_values(self, apikey, fieldname, deviceID, temp, humidity, moisture, light):
+    def update_values(self, apikey, fieldname, deviceID, temp, humidity):
         try:
             self.cursor.execute("select api_key from users;")
             output = self.cursor.fetchall()
@@ -50,11 +50,11 @@ class db:
                 dummy.append(i[0])
             if apikey in dummy:
                 
-                query = 'insert into {0} (deviceID, temperature, humidity, moisture, light, date_time) values("{1}", {2}, {3}, {4}, {5}, now());'.format(fieldname, deviceID, temp, humidity, moisture, light)
+                query = 'insert into {0} (deviceID, temperature, humidity, date_time) values("{1}", {2}, {3}, {4}, {5}, now());'.format(fieldname, deviceID, temp, humidity)
                 self.cursor.execute(query)
                 self.db.commit()
 
-                query = 'update Node set temperature={0}, humidity={1}, moisture = {2}, light={3} where deviceID="{4}";'.format(temp, humidity, moisture, light, deviceID)
+                query = 'update Node set temperature={0}, humidity={1}, where deviceID="{4}";'.format(temp, humidity, deviceID)
                 self.cursor.execute(query)
                 self.db.commit()
 
