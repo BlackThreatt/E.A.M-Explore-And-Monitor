@@ -258,16 +258,15 @@ def update_values(apikey, data):
     global mydb
     try:
         data = decode(data)
+        print(data)
         output = mydb.get_apikeys()
         if apikey in output:
-            if (len(data) == 6) and (type(data) is list):
+            if (len(data) == 4) and (type(data) is list):
                 fieldname = data[0]
                 deviceID = data[1]
                 temp = data[2]
                 humidity = data[3]
-                moisture = data[4]
-                light = data[5]
-                mydb.update_values(apikey, fieldname, deviceID, temp, humidity, moisture, light)
+                mydb.update_values(apikey, fieldname, deviceID, temp, humidity)
                 return ("Values Updated")
             else:
                 return "Data Decoding Error!"
@@ -287,13 +286,13 @@ def get_temperature(apikey):
     response = [time, randData]
     return jsonify(response)
 
-@app.route("/api/<string:apikey>/moisture", methods=["GET", "POST"])
-def get_moisture(apikey):
-    randData = choice(randlist)
-    time = datetime.now()
-    time = time.strftime("%H:%M:%S")
-    response = [time, randData]
-    return jsonify(response)
+# @app.route("/api/<string:apikey>/moisture", methods=["GET", "POST"])
+# def get_moisture(apikey):
+#     randData = choice(randlist)
+#     time = datetime.now()
+#     time = time.strftime("%H:%M:%S")
+#     response = [time, randData]
+#     return jsonify(response)
 
 @app.route("/api/<string:apikey>/humidity", methods=["GET", "POST"])
 def get_humidity(apikey):

@@ -1,3 +1,5 @@
+from dataclasses import field
+from traceback import print_tb
 import mysql.connector
 
 class db:
@@ -48,16 +50,15 @@ class db:
             dummy = []
             for i in output:
                 dummy.append(i[0])
+            print(dummy)
             if apikey in dummy:
                 
-                query = 'insert into {0} (deviceID, temperature, humidity, date_time) values("{1}", {2}, {3}, {4}, {5}, now());'.format(fieldname, deviceID, temp, humidity)
+                query = 'insert into {0} (deviceID, temperature, humidity, date_time) values("{1}", {2}, {3}, now());'.format(fieldname, deviceID, temp, humidity)
                 self.cursor.execute(query)
                 self.db.commit()
-
-                query = 'update Node set temperature={0}, humidity={1}, where deviceID="{4}";'.format(temp, humidity, deviceID)
+                query = 'update Node set temperature={0}, humidity={1} where deviceID="{2}";'.format(temp, humidity, deviceID)
                 self.cursor.execute(query)
                 self.db.commit()
-
                 return True
 
             else:

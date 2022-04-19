@@ -16,8 +16,8 @@ foreign key (username) references users(username), primary key (deviceID));
 select * from Node;
 -- select field_name, temperature, humidity, moisture, light from Node where username="amansingh";
 
-insert into Node (deviceID, username, field_name, temperature, humidity, moisture, light)
-values('Sensor_Pi', 'blackthreat', 'Rose Garden', 45, 54, 100, 600);
+insert into Node (deviceID, username, field_name, temperature, humidity)
+values('Sensor_Pi', 'blackthreat', 'Sensors', 45, 54);
 -- insert into Node (deviceID, username, field_name, temperature, humidity, moisture, light)
 -- values('ARMS22212', 'blackthreat', 'Samy Garden', 45, 54, 100, 600);
 
@@ -26,8 +26,8 @@ select * from Node;
 create table Sensors (deviceID varchar(255), temperature int, humidity int, moisture int, light int, date_time datetime,
 foreign key (deviceID) references Node(deviceID));
 
-insert into Sensors (deviceID, temperature, humidity, moisture, light, date_time)
-values('Sensor_Pi', 45, 54, 100, 600, now());
+insert into Sensors (deviceID, temperature, humidity, date_time)
+values('Sensor_Pi', 45, 54, , now());
 
 select * from users where username = "hellboy";
 update users set last_login = now() where username = "hellboy";

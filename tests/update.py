@@ -22,9 +22,9 @@ devlist = ['ARMS1112','ARMS12012','ARMS22212']
 
 while 1:
     try:
-        mydata = ['Sensors', 'Sensor_Pi', choice(randlist), choice(randlist), choice(randlist), choice(randlist)]
+        mydata = ['Sensors', 'Sensor_Pi', choice(randlist), choice(randlist)]
         a = encode(mydata)
-        url = 'http://127.0.0.1:8080/api/aGFja2luZ2lzYWNyaW1lYXNmc2FmZnNhZnNhZmZzYQ==/update/{}'.format(a)
+        url = 'http://127.0.0.1:8080/api/ahlawenti123/update/{}'.format(a)
         response = urllib.request.urlopen(url)
         print("[data]: "+ str(mydata))
         print("[Encoded Value]: "+ a)
