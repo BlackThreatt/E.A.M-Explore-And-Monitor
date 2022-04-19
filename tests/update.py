@@ -15,16 +15,16 @@ def decode(base64_message):
     message_bytes = base64.b64decode(base64_bytes)
     message = message_bytes.decode('ascii')
     return json.loads(message)
-
+api_key = 'YWhsYXdlbnRpMTIz'
 
 randlist = [i for i in range(0, 100)]
 devlist = ['ARMS1112','ARMS12012','ARMS22212']
 
 while 1:
     try:
-        mydata = ['Sensors', 'Sensor_Pi', choice(randlist), choice(randlist)]
+        mydata = ['Sensors', 'Sensor_Pi', choice(randlist), choice(randlist), choice(randlist)]
         a = encode(mydata)
-        url = 'http://127.0.0.1:8080/api/ahlawenti123/update/{}'.format(a)
+        url = 'http://127.0.0.1:8080/api/'+ api_key + '/update/{}'.format(a)
         response = urllib.request.urlopen(url)
         print("[data]: "+ str(mydata))
         print("[Encoded Value]: "+ a)
@@ -35,12 +35,3 @@ while 1:
     except:
         print("Website Not online")
         time.sleep(2)
-# mydict = {"name": "Aman Singh", "Age":18}
-# a = encode(mydict)
-# print(a)
-# print(type(a))
-# b = decode(a)
-# print(b["name"])
-
-# def upload_data():
-#     pass
