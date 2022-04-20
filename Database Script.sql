@@ -27,7 +27,7 @@ create table Sensors (deviceID varchar(255), temperature int, humidity int, mois
 foreign key (deviceID) references Node(deviceID));
 
 insert into Sensors (deviceID, temperature, humidity, date_time)
-values('Sensor_Pi', 45, 54, , now());
+values('Sensor_Pi', 45, 54, now());
 
 select * from users where username = "hellboy";
 update users set last_login = now() where username = "hellboy";

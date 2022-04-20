@@ -50,7 +50,6 @@ class db:
             dummy = []
             for i in output:
                 dummy.append(i[0])
-            print(dummy)
             if apikey in dummy:
                 
                 query = 'insert into {0} (deviceID, temperature, humidity, date_time) values("{1}", {2}, {3}, now());'.format(fieldname, deviceID, temp, humidity)
