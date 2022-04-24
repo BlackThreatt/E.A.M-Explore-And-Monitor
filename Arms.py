@@ -258,15 +258,21 @@ def update_values(apikey, data):
     global mydb
     try:
         data = decode(data)
-        print(data)
         output = mydb.get_apikeys()
+        apikey = base64.b64decode(apikey).decode('ascii')
         if apikey in output:
-            if (len(data) == 4) and (type(data) is list):
+            print("DATA ++")
+            print(data)
+            # print(data[3])
+            
+            if (len(data) == 5) and (type(data) is list):
                 fieldname = data[0]
                 deviceID = data[1]
                 temp = data[2]
                 humidity = data[3]
-                mydb.update_values(apikey, fieldname, deviceID, temp, humidity)
+                light = data[4]
+                print(data[4])
+                mydb.update_values(apikey, fieldname, deviceID, temp, humidity, light)
                 return ("Values Updated")
             else:
                 return "Data Decoding Error!"
