@@ -70,7 +70,7 @@ try:
 			else:
 				switchOffLight(LIGHT_GPIO)
 
-			data = [deviceID, tableName, humidity, temperature, light]
+			data = [deviceID, tableName, temperature, 0, humidity, light]
 			data_enc = encode(data)
 			url = 'http://127.0.0.1:8080/api/'+ api_key + '/update/{}'.format(data_enc)
 			response = urllib.request.urlopen(url)

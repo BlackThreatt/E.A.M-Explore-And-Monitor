@@ -265,14 +265,14 @@ def update_values(apikey, data):
             print(data)
             # print(data[3])
             
-            if (len(data) == 5) and (type(data) is list):
+            if (len(data) == 6) and (type(data) is list):
                 fieldname = data[0]
                 deviceID = data[1]
                 temp = data[2]
-                humidity = data[3]
-                light = data[4]
-                print(data[4])
-                mydb.update_values(apikey, fieldname, deviceID, temp, humidity, light)
+                moisture = data[3]
+                humidity = data[4]
+                light = data[5]
+                mydb.update_values(apikey, fieldname, deviceID, temp, moisture, humidity, light)
                 return ("Values Updated")
             else:
                 return "Data Decoding Error!"

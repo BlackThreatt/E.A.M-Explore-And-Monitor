@@ -11,23 +11,23 @@ truncate users;
 insert into users (username, password, first_name, last_name, email, phone_number, last_login, api_key) 
 values ('blackthreat', sha2('ahlawenti', 512), 'Mohamed Ali', 'Bessaidi', 'bessaidiMohamedAli99@gmail.com', '12345678', now(), 'ahlawenti123');
 
-create table Node (deviceID varchar(255), username varchar(255), field_name varchar(255), temperature int, humidity int, light int,
+create table Node (deviceID varchar(255), username varchar(255), field_name varchar(255), temperature int, moisture int, humidity int, light int,
 foreign key (username) references users(username), primary key (deviceID));
 select * from Node;
 -- select field_name, temperature, humidity, moisture, light from Node where username="amansingh";
 
-insert into Node (deviceID, username, field_name, temperature, humidity, light)
-values('Sensor_Pi', 'blackthreat', 'Sensors', 45, 54, 100);
+insert into Node (deviceID, username, field_name, temperature, moisture, humidity, light)
+values('Sensor_Pi', 'blackthreat', 'Sensors', 45, 0, 54, 100);
 -- insert into Node (deviceID, username, field_name, temperature, humidity, moisture, light)
 -- values('ARMS22212', 'blackthreat', 'Samy Garden', 45, 54, 100, 600);
 
 select * from Node;
 
-create table Sensors (deviceID varchar(255), temperature int, humidity int, light int, date_time datetime,
+create table Sensors (deviceID varchar(255), temperature int, moisture int, humidity int, light int, date_time datetime,
 foreign key (deviceID) references Node(deviceID));
 
-insert into Sensors (deviceID, temperature, humidity, light, date_time)
-values('Sensor_Pi', 45, 54, 600, now());
+insert into Sensors (deviceID, temperature, moisture, humidity, light, date_time)
+values('Sensor_Pi', 45, 54, 0, 600, now());
 
 select * from users where username = "hellboy";
 update users set last_login = now() where username = "hellboy";
