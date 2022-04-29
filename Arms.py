@@ -1,9 +1,10 @@
-from flask import Flask, render_template, jsonify, redirect, request
+from flask import Flask, render_template, jsonify, redirect, request, Response
 import json, database, base64
 from random import choice
 from datetime import datetime
 import person
 import os, binascii
+from camera_pi import Camera
 
 app = Flask(__name__)
 
@@ -11,7 +12,17 @@ logged_in = {}
 api_loggers = {}
 mydb = database.db('dbuser', '127.0.0.1', 'dbpass', 'ARMS')
 
-#test api key aGFja2luZ2lzYWNyaW1lYXNmc2FmZnNhZnNhZmZzYQ==
+def gen(camera):
+    """Video streaming generator function."""
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    """Video streaming route. Put this in the src attribute of an img tag."""
+    return Response(gen(Camera()),mimetype='multipart/x-mixed-replace;boundary=frame') 
+
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -126,6 +137,34 @@ def profile(username, session):
     else:
         return redirect('/login')
 
+#this part is for the livestream view
+@app.route('/livestream/<string:username>/<string:session>', methods=['GET', 'POST'])
+def livestream(username, session):
+    
+    global logged_in
+
+    if username in logged_in and (logged_in[username]['object'].session_id == session):
+        user = {
+            "username" : username,
+            "image":"/static/images/amanSingh.jpg",
+            "api": logged_in[username]["object"].api,
+            "session" : session,
+            "firstname": logged_in[username]["object"].first,
+            "lastname": logged_in[username]["object"].last,
+            "email":logged_in[username]["object"].email,
+            "phone":logged_in[username]["object"].phone,
+            "lastlogin":logged_in[username]["object"].last_login,
+        }
+
+        devices = [
+            {"Dashboard" : "device1",
+            "deviceID": "Sensor_Pi"
+            }
+        ]
+        return render_template('livestream.htm', title='API-Settings', user=user, devices=devices)
+    
+    else:
+        return redirect('/login')
 
 @app.route('/logout/<string:username>/<string:session>', methods=['GET', 'POST'])
 def logout(username, session):

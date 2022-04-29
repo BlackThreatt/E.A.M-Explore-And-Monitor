@@ -9,8 +9,8 @@ function getdevice(){
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         addData(temp_chart, time, result[3]);
-        addData(humid_chart, time, result[4]);
-        addData(moist_chart, time, result[5]);
+        addData(humid_chart, time, result[5]);
+        addData(moist_chart, time, result[4]);
         addData(light_chart, time, result[6]);
         document.getElementById("card-temp").innerHTML = result[3];
         document.getElementById("card-moisture").innerHTML = result[4];
@@ -66,8 +66,9 @@ var humid_chart = new Chart(humidity, {
             label: 'Humidity W.R.T. Time',
             data: [],
             fill:true,
-            backgroundColor: 'rgba(33, 150, 243, 0.1)',
-            borderColor:'rgba(33, 150, 243, 1)',
+            backgroundColor: 'rgba(0, 150, 136, 0.1)',
+            borderColor:'rgba(0, 150, 136, 1)',
+            
             borderWidth: 3
         }]
     },
@@ -91,8 +92,8 @@ var moist_chart = new Chart(moisture, {
             label: 'Moisture W.R.T. Time',
             data: [],
             fill:true,
-            backgroundColor: 'rgba(0, 150, 136, 0.1)',
-            borderColor:'rgba(0, 150, 136, 1)',
+            backgroundColor: 'rgba(33, 150, 243, 0.1)',
+            borderColor:'rgba(33, 150, 243, 1)',
             borderWidth: 3
         }]
     },
