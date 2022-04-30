@@ -22,7 +22,7 @@ devlist = ['ARMS1112','ARMS12012','ARMS22212']
 
 while 1:
     try:
-        mydata = ['Sensors', 'Sensor_Pi', choice(randlist), choice(randlist), choice(randlist)]
+        mydata = ['Sensors', 'Sensor_Pi', choice(randlist), choice(randlist), choice(randlist), choice(randlist)]
         a = encode(mydata)
         url = 'http://127.0.0.1:8080/api/'+ api_key + '/update/{}'.format(a)
         response = urllib.request.urlopen(url)
