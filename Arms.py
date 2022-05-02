@@ -36,8 +36,8 @@ def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(gen(Camera()), mimetype='multipart/x-mixed-replace;boundary=frame')
 
-
-@app.route("/login", methods=['GET', 'POST'])
+# this links to the main dashboard
+@app.route("/", methods=['GET', 'POST'])
 def login():
     error = ""
     if request.method == 'POST':
@@ -49,7 +49,7 @@ def login():
         else:
             error = "invalid Username or Passowrd"
 
-    return render_template('Login.htm', error=error)
+    return render_template('login.htm', error=error)
 
 # this links is for device 1
 
@@ -67,12 +67,6 @@ def Dashoboard():
          }
     ]
     return render_template('device_dashboard.htm', title='Dashobard', user=user, devices=devices)
-
-
-# this link is for the main dashboard of the website
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    return render_template('home.htm', title='HOME - Landing Page')
 
 
 @app.route('/overview/<string:username>/<string:session>', methods=['GET', 'POST'])
@@ -96,7 +90,7 @@ def overview(username, session):
         return render_template('overview.htm', title='Overview', user=user, devices=devices)
 
     else:
-        return redirect('/login')
+        return redirect('/')
 
 # this location will get to the api setting
 
@@ -122,7 +116,7 @@ def apisettings(username, session):
         return render_template('api_settings.htm', title='API-Settings', user=user, devices=devices)
 
     else:
-        return redirect('/login')
+        return redirect('/')
 
 
 # this part is for the profile view
@@ -152,7 +146,7 @@ def profile(username, session):
         return render_template('profile.htm', title='API-Settings', user=user, devices=devices)
 
     else:
-        return redirect('/login')
+        return redirect('/')
 
 # this part is for the livestream view
 
@@ -174,7 +168,7 @@ def livestream(username, session,):
         }
         return render_template('livestream.htm', title='Camera Livestream', templateData=templateData, user=user)
     else:
-        return redirect('/login')
+        return redirect('/')
 
 
 @app.route('/livestream/<string:username>/<string:session>', methods=['POST'])
@@ -204,7 +198,7 @@ def my_form_post(username, session):
         }
         return render_template('livestream.htm', title='Camera Livestream', templateData=templateData, user=user)
     else:
-        return redirect('/login')
+        return redirect('/')
 
 
 @app.route('/livestream/<string:username>/<string:session>/<servo>/<angle>', methods=['GET', 'POST'])
@@ -241,7 +235,7 @@ def move(username, session, servo, angle):
 
         return render_template('livestream.htm', title='Camera Livestream', templateData=templateData, user=user)
     else:
-        return redirect('/login')
+        return redirect('/')
 
 
 @app.route('/logout/<string:username>/<string:session>', methods=['GET', 'POST'])
@@ -254,7 +248,7 @@ def logout(username, session):
         # print("logged out")
         return redirect('/')
     else:
-        return redirect('/login')
+        return redirect('/')
 
 # this is the testing for api
 

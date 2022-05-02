@@ -97,9 +97,6 @@
       <center>
         <img src="{{ url_for('video_feed') }}" width="80%">
         <hr>
-        <table width="100%">
-          <tr>
-            <td>
               <h4> PAN Angle: <a href="/livestream/{{ user.username }}/{{ user.session }}/pan/-" class="button">-</a> [
                 {{
                 templateData.panServoAngle }} ]
@@ -109,20 +106,7 @@
                 [ {{
                 templateData.tiltServoAngle }} ]
                 <a href="/livestream/{{ user.username }}/{{ user.session }}/tilt/+" class="button">+</a>
-              </h4>
-            </td>
-            <td>
-              <p> Enter Pan Tilt Servo Angle:</p>
-              <form method="POST">
-                PAN: <input type="text" name="panServoAngle" value={{templateData.panServoAngle}} size="3">
-                TILT: <input type="text" name="tiltServoAngle" value={{templateData.tiltServoAngle}} size="3">
-                <input type="submit">
-              </form>
-            </td>
-          </tr>
-
-        </table>
-
+                </h4>
 
         <hr>
       </center>
@@ -139,14 +123,13 @@
           <h6>Deepak Yadu</h6>
           <h6>Khyati banjare</h6>
           <h6>Arwind</h6>
+          <h6>Mohamed Ali Bessaidi</h6>
         </div>
         <div class="w3-container w3-third">
           <h5 class="w3-bottombar w3-border-red">Guides</h5>
-          <h6>All faculties Of BIT Raipur</h6>
         </div>
         <div class="w3-container w3-third">
           <h5 class="w3-bottombar w3-border-orange">References</h5>
-          <h6>Google.com</h6>
         </div>
       </div>
     </div>

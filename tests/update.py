@@ -24,7 +24,7 @@ while 1:
     try:
         mydata = ['Sensors', 'Sensor_Pi', choice(randlist), choice(randlist), choice(randlist), choice(randlist)]
         a = encode(mydata)
-        url = 'http://127.0.0.1:8080/api/'+ api_key + '/update/{}'.format(a)
+        url = 'https://f025-197-0-4-59.eu.ngrok.io/api/'+ api_key + '/update/{}'.format(a)
         response = urllib.request.urlopen(url)
         print("[data]: "+ str(mydata))
         print("[Encoded Value]: "+ a)
