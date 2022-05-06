@@ -179,12 +179,12 @@ def my_form_post(username, session):
         panNewAngle = int(request.form['panServoAngle'])
         if (panNewAngle != panServoAngle):
             panServoAngle = panNewAngle
-            os.system("python3 angleServoCtrl.py " +
+            os.system("python3 scripts/angleServoCtrl.py " +
                       str(panPin) + " " + str(panServoAngle))
         tiltNewAngle = int(request.form['tiltServoAngle'])
         if (tiltNewAngle != tiltServoAngle):
             tiltServoAngle = tiltNewAngle
-            os.system("python3 angleServoCtrl.py " +
+            os.system("python3 scripts/angleServoCtrl.py " +
                       str(tiltPin) + " " + str(tiltServoAngle))
         user = {
             "username": username,
@@ -222,7 +222,7 @@ def move(username, session, servo, angle):
                 panServoAngle = panServoAngle + 10
             else:
                 panServoAngle = panServoAngle - 10
-            os.system("python3.9 angleServoCtrl.py " +
+            os.system("python3.9 scripts/angleServoCtrl.py " +
                       str(panPin) + " " + str(panServoAngle))
 
         if servo == 'tilt':
@@ -230,7 +230,7 @@ def move(username, session, servo, angle):
                 tiltServoAngle = tiltServoAngle + 10
             else:
                 tiltServoAngle = tiltServoAngle - 10
-            os.system("python3.9 angleServoCtrl.py " +
+            os.system("python3.9 scripts/angleServoCtrl.py " +
                       str(tiltPin) + " " + str(tiltServoAngle))
 
         return render_template('livestream.htm', title='Camera Livestream', templateData=templateData, user=user)
@@ -457,4 +457,5 @@ def decode(base64_message):
 
 
 if __name__ == "__main__":
+    # os.system("python3 scripts/Receiver_RPI.py &")
     app.run(host="0.0.0.0", port="8080", debug=True)

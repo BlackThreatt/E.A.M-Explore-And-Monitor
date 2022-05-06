@@ -13,13 +13,13 @@ for proc in psutil.process_iter():
 GPIO.setmode(GPIO.BCM) 
 
 deviceID = 'Sensors'			        # Host name of the Pi
-tableName = 'Sensor_Pi'					# Sensor table name
+tableName = 'Sensor_Pi'				# Sensor table name
 api_key = 'YWhsYXdlbnRpMTIz'			# API Key
 
 ldr_threshold = 25000
-DHT11_GPIO = 23
-LIGHT_GPIO = 25
-LDR_GPIO = 18
+DHT11_GPIO = 21
+LIGHT_GPIO = 4
+LDR_GPIO = 20
 
 GPIO.setup(DHT11_GPIO, GPIO.OUT)
 GPIO.setup(LDR_GPIO, GPIO.OUT)
