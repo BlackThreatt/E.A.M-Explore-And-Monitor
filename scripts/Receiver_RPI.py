@@ -8,7 +8,7 @@ io.setmode(io.BCM)
 IN1 = 2
 IN2 = 3
 IN3 = 14
-IN4 = 18
+IN4 = 15
 #setup driver pins
 io.setup(IN1,io.OUT)#IN1
 io.setup(IN2,io.OUT)#IN2
