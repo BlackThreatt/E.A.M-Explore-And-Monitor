@@ -20,8 +20,8 @@ global tiltServoAngle
 panServoAngle = 90
 tiltServoAngle = 90
 
-panPin = 2
-tiltPin = 3
+panPin = 26
+tiltPin = 19
 
 
 def gen(camera):
